@@ -6,8 +6,11 @@ import Order from './Order';
 import Inventory from './Inventory';
 import Fish from './Fish';
 
-// Misc
+// Seeds
 import sampleFishes from '../sample-fishes';
+
+// Firebase
+import base from '../base';
 
 class App extends React.Component {
   constructor() {
@@ -23,6 +26,15 @@ class App extends React.Component {
       fishes: {},
       order: {},
     }
+  }
+
+  componentWillMount() {
+    const baseStore = `${this.props.params.storeId}/fishes`
+    this.ref = base.syncState(baseStore, { context: this, state: 'fishes' })
+  }
+
+  componentWillUnmount() {
+    base.removeBinding(this.ref)
   }
 
   addFish(fish) {
@@ -53,7 +65,8 @@ class App extends React.Component {
   }
 
   render() {
-    const fishList = Object
+    const fishList =
+      Object
       .keys(this.state.fishes)
       .map(
         key => <Fish
