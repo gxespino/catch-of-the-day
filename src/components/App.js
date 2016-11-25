@@ -1,10 +1,10 @@
 import React from 'react';
 
 // Components
-import Header from './Header';
-import Order from './Order';
+import Header    from './Header';
+import Order     from './Order';
 import Inventory from './Inventory';
-import Fish from './Fish';
+import Fish      from './Fish';
 
 // Seeds
 import sampleFishes from '../sample-fishes';
@@ -149,6 +149,10 @@ class App extends React.Component {
       </div>
     )
   }
+}
+
+App.propTypes = {
+  params: React.PropTypes.object.isRequired
 }
 
 export default App;
